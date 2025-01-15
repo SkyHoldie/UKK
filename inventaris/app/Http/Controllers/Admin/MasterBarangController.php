@@ -16,13 +16,19 @@ class MasterBarangController extends Controller
             $query->where('nama_barang', 'like', '%' . $request->search . '%');
         }
 
-        $masterBarangs = $query->get();
-        return view('master_barang.index', compact('masterBarangs'));
+        $masterBarangs = MasterBarang::with('kategori')->get();
+        return view('admin.master_barang.index', compact('masterBarangs'));
     }
 
     public function show($id)
     {
         $masterBarang = MasterBarang::where('id_barang', $id)->firstOrFail();
         return view('admin.master_barang.show', compact('masterBarang'));
+    }
+
+    public function create()
+    {
+        $categories = KategoriAsset::all(); // Mengambil data kategori untuk dropdown
+        return view('admin.master_barang.create', compact('categories'));
     }
 }

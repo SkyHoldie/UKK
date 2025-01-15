@@ -10,8 +10,8 @@ class KategoriAssetController extends Controller
 {
     public function index()
     {
-        $kategoriAssets = KategoriAsset::all();
-        return view('admin.kategori_asset.index', compact('kategoriAssets'));
+        $kategori_assets = KategoriAsset::all();
+        return view('admin.kategori_asset.index', compact('kategori_assets'));
     }
 
     // Tambahkan metode lain jika diperlukan (create, store, edit, update, destroy)

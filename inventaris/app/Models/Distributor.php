@@ -9,10 +9,8 @@ class Distributor extends Model
 {
     use HasFactory;
 
-    // Tentukan tabel jika nama tabel berbeda dengan nama model
-    protected $table = 'tbl_distributor';
+    protected $table = 'tbl_distributor'; // Pastikan nama tabel sesuai dengan database Anda
 
-    // Tentukan kolom yang dapat diisi (optional)
     protected $fillable = [
         'nama_distributor',
         'alamat',

@@ -9,11 +9,10 @@ class Satuan extends Model
 {
     use HasFactory;
 
-    // Tentukan tabel jika nama tabel berbeda dengan nama model
-    protected $table = 'tbl_satuan';
+    protected $table = 'tbl_satuan'; // Nama tabel
+    protected $primaryKey = 'id_satuan'; // Primary key
 
-    // Tentukan kolom yang dapat diisi (optional)
     protected $fillable = [
-        'satuan',
+        'nama_satuan',
     ];
 }

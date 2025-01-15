@@ -14,9 +14,9 @@ class CreateTblSatuanTable extends Migration
     public function up()
     {
         Schema::create('tbl_satuan', function (Blueprint $table) {
-            $table->increments('id_satuan'); // Primary Key
-            $table->string('satuan', 25)->unique(); // Kolom satuan dengan panjang maksimum 25 karakter
-            $table->timestamps(); // Kolom created_at dan updated_at
+            $table->id('id_satuan');
+            $table->string('nama_satuan');
+            $table->timestamps();
         });
 
         // Tambahkan indeks

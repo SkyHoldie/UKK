@@ -13,11 +13,11 @@ class CreateTblDepresiasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_depresiasi', function (Blueprint $table) {
-            $table->increments('id_depresiasi'); // Primary Key
-            $table->integer('lama_depresiasi'); // Kolom lama depresiasi
-            $table->string('keterangan', 500)->nullable(); // Kolom keterangan
-            $table->timestamps(); // Kolom created_at dan updated_at
+        Schema::create('depresiasis', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->decimal('nilai', 10, 2);
+            $table->timestamps();
         });
 
         // Tambahkan indeks
