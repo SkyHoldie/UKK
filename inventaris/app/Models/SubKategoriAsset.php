@@ -1,36 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use App\Models\SubKategoriAsset;
-use App\Models\KategoriAsset;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class SubKategoriAssetController extends Controller
+class SubKategoriAsset extends Model
 {
-    public function create()
+
+    protected $table = 'tbl_sub_kategori_asset';
+    use HasFactory;
+
+    // Tentukan kolom yang boleh diisi secara mass-assignment
+    protected $fillable = [
+        'kode_sub_kategori_asset',
+        'sub_kategori_asset',
+        'id_kategori_asset',
+    ];
+
+    // Method untuk menyimpan data
+    public static function storeData($validatedData)
     {
-        // Mengambil semua kategori asset untuk dropdown
-        $kategori_assets = KategoriAsset::all();
-        return view('sub_kategori_asset.create', compact('kategori_assets'));
-    }
-
-    public function store(Request $request)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'kode_sub_kategori_asset' => 'required|string|max:255',
-            'sub_kategori_asset' => 'required|string|max:255',
-            'id_kategori_asset' => 'required|exists:tbl_kategori_asset,id_kategori_asset',  // Validasi kategori asset
+        return self::create([
+            'kode_sub_kategori_asset' => $validatedData['kode_sub_kategori_asset'],
+            'sub_kategori_asset' => $validatedData['sub_kategori_asset'],
+            'id_kategori_asset' => $validatedData['id_kategori_asset'],
         ]);
-
-        // Menyimpan data ke dalam tabel Sub Kategori Asset
-        SubKategoriAsset::create([
-            'kode_sub_kategori_asset' => $validated['kode_sub_kategori_asset'],
-            'sub_kategori_asset' => $validated['sub_kategori_asset'],
-            'id_kategori_asset' => $validated['id_kategori_asset'],
-        ]);
-
-        return redirect()->route('sub_kategori_asset.index')->with('success', 'Sub Kategori Asset berhasil ditambahkan!');
     }
 }

@@ -13,7 +13,9 @@ class CreateTblPengadaanTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('tbl_pengadaan', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id_pengadaan'); // Primary Key
             $table->unsignedInteger('id_master_barang'); // Foreign Key ke tbl_master_barang
             $table->unsignedInteger('id_depresiasi'); // Foreign Key ke tbl_depresiasi
@@ -33,44 +35,44 @@ class CreateTblPengadaanTable extends Migration
             $table->timestamps(); // Kolom created_at dan updated_at
         });
 
-        // Tambahkan indeks
+        // Add indexes
         Schema::table('tbl_pengadaan', function (Blueprint $table) {
             $table->index(['id_master_barang', 'kode_pengadaan'], 'pengadaan_index');
         });
 
-        // Menambahkan relasi dengan tabel lainnya
-        Schema::table('tbl_pengadaan', function (Blueprint $table) {
-            $table->foreign('id_master_barang')
-                  ->references('id_barang')
-                  ->on('tbl_master_barang')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->foreign('id_depresiasi')
-                  ->references('id_depresiasi')
-                  ->on('tbl_depresiasi')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->foreign('id_merk')
-                  ->references('id_merk')
-                  ->on('tbl_merk')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->foreign('id_satuan')
-                  ->references('id_satuan')
-                  ->on('tbl_satuan')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->foreign('id_sub_kategori_asset')
-                  ->references('id_sub_kategori_asset')
-                  ->on('tbl_sub_kategori_asset')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->foreign('id_distributor')
-                  ->references('id_distributor')
-                  ->on('tbl_distributor')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-        });
+        // // Adding foreign key constraints
+        // Schema::table('tbl_pengadaan', function (Blueprint $table) {
+        //     // Ensure the foreign keys reference columns with matching types and primary/unique constraints
+        //     $table->foreign('id_master_barang')
+        //           ->references('id_barang')
+        //           ->on('tbl_master_barang')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('id_depresiasi')
+        //           ->references('id_depresiasi')
+        //           ->on('tbl_depresiasi')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('id_merk')
+        //           ->references('id_merk')
+        //           ->on('tbl_merk')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('id_satuan')
+        //           ->references('id_satuan')
+        //           ->on('tbl_satuan')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('id_sub_kategori_asset')
+        //           ->references('id_sub_kategori_asset')
+        //           ->on('tbl_sub_kategori_asset')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('id_distributor')
+        //           ->references('id_distributor')
+        //           ->on('tbl_distributor')
+        //           ->onDelete('cascade');
+        // });
     }
 
     /**
@@ -83,3 +85,4 @@ class CreateTblPengadaanTable extends Migration
         Schema::dropIfExists('tbl_pengadaan');
     }
 }
+

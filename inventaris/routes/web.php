@@ -19,11 +19,15 @@ use App\Http\Controllers\HitungDepresiasiController;
 use App\Http\Controllers\Admin\MasterBarangController as AdminMasterBarangController;
 use App\Http\Controllers\AssetController;
 
+Route::get('master-barang', [MasterBarangController::class, 'index'])->name('user.master_barang.index');
+
 // Route untuk menampilkan form tambah sub kategori asset
 Route::get('/sub-kategori-asset/create', [SubKategoriAssetController::class, 'create'])->name('sub_kategori_asset.create');
 
 // Route untuk menyimpan sub kategori asset
 Route::post('/sub-kategori-asset', [SubKategoriAssetController::class, 'store'])->name('sub_kategori_asset.store');
+Route::resource('sub-kategori-asset', SubKategoriAssetController::class);
+
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('hitung_depresiasi', HitungDepresiasiController::class);
@@ -41,7 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 });
 
 // Grup dengan middleware 'admin' hanya untuk rute yang memerlukan akses admin
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('satuan', SatuanController::class);
     Route::resource('merk', MerkController::class);
     Route::resource('distributor', DistributorController::class);
@@ -50,7 +54,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 });
 
 // Rute untuk master barang dengan admin role
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('master_barang', AdminMasterBarangController::class)->names([
         'index' => 'admin.master_barang.index',
         'show' => 'admin.master_barang.show',

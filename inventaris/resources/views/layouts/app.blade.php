@@ -123,62 +123,62 @@
             </div>
             <ul class="c-sidebar-nav-items list-unstyled">
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.kategori_asset.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/kategori_asset') || request()->is('admin/kategori_asset/*')  ? 'active' : ''}}" href="{{ route('admin.kategori_asset.index') }}">
                         <i class="bi bi-box"></i> Kategori Asset
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.sub_kategori_asset.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/sub_kategori_asset') || request()->is('admin/sub_kategori_asset/*')? 'active' : ''}}" href="{{ route('admin.sub_kategori_asset.index') }}">
                         <i class="bi bi-boxes"></i> Sub Kategori Asset
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.distributor.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/distributor') || request()->is('admin/distributor/*') ? 'active' : ''}}" href="{{ route('admin.distributor.index') }}">
                         <i class="bi bi-truck"></i> Distributor
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.merk.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/merk') || request()->is('admin/merk/*') ? 'active' : ''}}" href="{{ route('admin.merk.index') }}">
                         <i class="bi bi-tags"></i> Merk
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.satuan.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/satuan') || request()->is('admin/satuan/*') ? 'active' : ''}}" href="{{ route('admin.satuan.index') }}">
                         <i class="bi bi-rulers"></i> Satuan
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.master_barang.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/master_barang') || request()->is('admin/master_barang/*') ? 'active' : ''}}" href="{{ route('admin.master_barang.index') }}">
                         <i class="bi bi-box-seam"></i> Master Barang
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.depresiasi.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/depresiasi') || request()->is('admin/depresiasi/*')? 'active' : ''}}" href="{{ route('admin.depresiasi.index') }}">
                         <i class="bi bi-piggy-bank"></i> Depresiasi
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.pengadaan.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/pengadaan') || request()->is('admin/pengadaan/*') ? 'active' : ''}}" href="{{ route('admin.pengadaan.index') }}">
                         <i class="bi bi-cart"></i> Pengadaan
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.lokasi.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/lokasi') || request()->is('admin/lokasi/*') ? 'active' : ''}}" href="{{ route('admin.lokasi.index') }}">
                         <i class="bi bi-geo-alt"></i> Lokasi
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.mutasi_lokasi.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/mutasi_lokasi') || request()->is('admin/mutasi_lokasi/*') ? 'active' : ''}}" href="{{ route('admin.mutasi_lokasi.index') }}">
                         <i class="bi bi-arrows-move"></i> Mutasi Lokasi
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.opname.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/opname') || request()->is('admin/opname/*') ? 'active' : ''}}" href="{{ route('admin.opname.index') }}">
                         <i class="bi bi-journal"></i> Opname
                     </a>
                 </li>
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('admin.hitung_depresiasi.index') }}">
+                    <a class="c-sidebar-nav-link {{request()->is('admin/hitung_depresiasi') || request()->is('admin/hitung_depresiasi/*') ? 'active' : ''}}" href="{{ route('admin.hitung_depresiasi.index') }}">
                         <i class="bi bi-calculator"></i> Hitung Depresiasi
                     </a>
                 </li>

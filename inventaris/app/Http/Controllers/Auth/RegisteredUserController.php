@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,23 +29,34 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    // Validasi input dari form registrasi
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    // Buat pengguna baru
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+    // Cek jika email pengguna adalah admin@admin.com dan beri peran admin
+    if ($request->email == 'admin@admin.com') {
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);  // Membuat role admin jika belum ada
+        $user->assignRole($adminRole);  // Mengaitkan peran admin pada pengguna
     }
+
+    // Kirimkan event Registered untuk mendaftarkan pengguna
+    event(new Registered($user));
+
+    // Login pengguna yang baru dibuat
+    Auth::login($user);
+
+    // Redirect ke dashboard setelah berhasil registrasi
+    return redirect(route('dashboard', absolute: false));
+}
 }

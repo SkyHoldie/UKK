@@ -13,6 +13,9 @@ class CreateTblSatuanTable extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('tbl_satuan')) {
+            return;
+        }
         Schema::create('tbl_satuan', function (Blueprint $table) {
             $table->id('id_satuan');
             $table->string('nama_satuan');
@@ -20,9 +23,7 @@ class CreateTblSatuanTable extends Migration
         });
 
         // Tambahkan indeks
-        Schema::table('tbl_satuan', function (Blueprint $table) {
-            $table->index(['satuan'], 'satuan_index'); // Indeks pada kolom 'satuan'
-        });
+       
     }
 
     /**

@@ -13,17 +13,17 @@ class CreateTblDepresiasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('depresiasis', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->decimal('nilai', 10, 2);
+        if (Schema::hasTable('tbl_depresiasi')) {
+            return;
+        }
+        Schema::create('tbl_depresiasi', function (Blueprint $table) {
+            $table->unsignedInteger('id_depresiasi');  // Make sure this column is a primary key or unique
+            $table->integer('lama_depresiasi');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
 
-        // Tambahkan indeks
-        Schema::table('tbl_depresiasi', function (Blueprint $table) {
-            $table->index(['lama_depresiasi'], 'lama_depresiasi_index'); // Index pada kolom 'lama_depresiasi'
-        });
+        
     }
 
     /**

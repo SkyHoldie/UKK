@@ -22,9 +22,9 @@ class CreateTblMasterBarangTable extends Migration
         });
 
         // Tambahkan indeks
-        Schema::table('tbl_master_barang', function (Blueprint $table) {
-            $table->index(['kode_barang'], 'kode_barang_index'); // Indeks pada kolom 'kode_barang'
-        });
+        // Schema::table('tbl_master_barang', function (Blueprint $table) {
+        //     $table->index(['kode_barang'], 'kode_barang_index'); // Indeks pada kolom 'kode_barang'
+        // });
     }
 
     /**

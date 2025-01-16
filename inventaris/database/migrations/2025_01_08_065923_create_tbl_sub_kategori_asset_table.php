@@ -4,20 +4,33 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubKategoriAssetTable extends Migration
+class CreateTblSubKategoriAssetTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
+        if (Schema::hasTable('tbl_sub_kategori_asset')) {
+            return;
+        }
+        
+        // Create tbl_sub_kategori_asset table
         Schema::create('tbl_sub_kategori_asset', function (Blueprint $table) {
-            $table->id('id_sub_kategori');
-            $table->string('nama_sub_kategori');
-            $table->unsignedBigInteger('kategori_id');
-            $table->timestamps();
+            // Set InnoDB engine for foreign key support
+            $table->engine = 'InnoDB';
 
-            $table->foreign('kategori_id')->references('id_kategori')->on('tbl_kategori_asset')->onDelete('cascade');
+            // Define columns
+            $table->id('id_sub_kategori_asset');  // Column id_sub_kategori_asset
+            $table->string('kode_sub_kategori_asset');  // Column kode_sub_kategori_asset
+            $table->string('nama_sub_kategori');  // Column nama_sub_kategori
+            $table->unsignedBigInteger('kategori_id');  // Column kategori_id which will be foreign key
+            $table->timestamps();  // Created_at and updated_at columns
+
+            // Add foreign key constraint on kategori_id
+            $table->foreign('kategori_id')
+                ->references('id_kategori_asset')  // Points to id_kategori_asset column in tbl_kategori_asset
+                ->on('tbl_kategori_asset');  // Deletes sub-category if the category is deleted
         });
     }
 
@@ -26,6 +39,7 @@ class CreateSubKategoriAssetTable extends Migration
      */
     public function down(): void
     {
+        // Menghapus tabel tbl_sub_kategori_asset
         Schema::dropIfExists('tbl_sub_kategori_asset');
     }
 }

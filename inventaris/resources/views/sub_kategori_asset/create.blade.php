@@ -1,3 +1,4 @@
+<!-- resources/views/sub_kategori_asset/create.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -12,12 +13,12 @@
                 <input type="text" name="kode_sub_kategori_asset" id="kode_sub_kategori_asset" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="sub_kategori_asset">Nama Sub Kategori Asset</label>
-                <input type="text" name="sub_kategori_asset" id="sub_kategori_asset" class="form-control" required>
+                <label for="nama_sub_kategori">Nama Sub Kategori Asset</label>
+                <input type="text" name="nama_sub_kategori" id="nama_sub_kategori" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="id_kategori_asset">Pilih Kategori Asset</label>
-                <select name="id_kategori_asset" id="id_kategori_asset" class="form-control" required>
+                <label for="kategori_id">Pilih Kategori Asset</label>
+                <select name="kategori_id" id="kategori_id" class="form-control" required>
                     @foreach($kategori_assets as $kategori)
                         <option value="{{ $kategori->id_kategori_asset }}">{{ $kategori->kategori_asset }}</option>
                     @endforeach
