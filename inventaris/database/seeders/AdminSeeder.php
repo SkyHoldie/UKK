@@ -16,16 +16,17 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'), // Ubah sesuai kebutuhan
+            'role' =>'admin' // Ubah sesuai kebutuhan
         ]);
 
         // Pastikan role 'admin' sudah ada atau buat role baru
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        dd($adminRole);  // Debug untuk memastikan role admin sudah ada
+      // Debug untuk memastikan role admin sudah ada
 
         // Menugaskan peran 'admin' ke pengguna
         $user->assignRole($adminRole);
 
         // Debug untuk memastikan apakah role berhasil ditugaskan
-        dd($user->roles);
+        
     }
 }

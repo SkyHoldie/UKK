@@ -17,7 +17,7 @@ class CreateTblDistributorTable extends Migration
             $table->increments('id_distributor'); // Primary Key
             $table->string('nama_distributor', 50); // Kolom nama distributor
             $table->string('alamat', 50); // Kolom alamat
-            $table->string('no_telp', 15); // Kolom nomor telepon
+            $table->string('no_telp', 15)->nullable(); // Kolom nomor telepon yang diizinkan NULL
             $table->string('email', 30)->nullable(); // Kolom email
             $table->string('keterangan', 45)->nullable(); // Kolom keterangan
             $table->timestamps(); // Kolom created_at dan updated_at

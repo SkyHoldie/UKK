@@ -21,13 +21,8 @@ use App\Http\Controllers\AssetController;
 
 Route::get('master-barang', [MasterBarangController::class, 'index'])->name('user.master_barang.index');
 
-// Route untuk menampilkan form tambah sub kategori asset
 Route::get('/sub-kategori-asset/create', [SubKategoriAssetController::class, 'create'])->name('sub_kategori_asset.create');
-
-// Route untuk menyimpan sub kategori asset
 Route::post('/sub-kategori-asset', [SubKategoriAssetController::class, 'store'])->name('sub_kategori_asset.store');
-Route::resource('sub-kategori-asset', SubKategoriAssetController::class);
-
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('hitung_depresiasi', HitungDepresiasiController::class);

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriAsset;
-use App\Models\SubKategoriAsset;
 use Illuminate\Http\Request;
+use App\Models\SubKategoriAsset;
+use App\Models\KategoriAsset;
 
 class SubKategoriAssetController extends Controller
 {
     public function index()
     {
-        // Menampilkan form tambah sub kategori asset
+        // Ambil semua data sub kategori asset
         $subKategoriAssets = SubKategoriAsset::all();
+
+        // Tampilkan ke view
         return view('sub_kategori_asset.index', compact('subKategoriAssets'));
     }
     
@@ -26,18 +28,19 @@ class SubKategoriAssetController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'kode_sub_kategori_asset' => 'required|string|max:255',
-            'nama_sub_kategori' => 'required|string|max:255',
-            'kategori_id' => 'required|exists:tbl_kategori_asset,id_kategori_asset',
+        // Validasi data yang diterima dari form
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            // Validasi lain sesuai kebutuhan
         ]);
 
+        // Simpan data ke database
         $subKategoriAsset = new SubKategoriAsset();
-        $subKategoriAsset->kode_sub_kategori_asset = $request->kode_sub_kategori_asset;
-        $subKategoriAsset->nama_sub_kategori = $request->nama_sub_kategori; // Sesuaikan dengan nama kolom di database
-        $subKategoriAsset->kategori_id = $request->kategori_id;
+        $subKategoriAsset->nama = $validated['nama'];
+        // Simpan atribut lainnya jika perlu
         $subKategoriAsset->save();
 
-        return redirect()->route('sub_kategori_asset.index')->with('success', 'Sub Kategori Asset berhasil ditambahkan.');
+        // Redirect atau memberikan response
+        return redirect()->route('sub_kategori_asset.index')->with('success', 'Sub Kategori Asset berhasil disimpan!');
     }
 }
