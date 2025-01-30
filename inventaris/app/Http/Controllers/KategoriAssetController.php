@@ -35,15 +35,22 @@ class KategoriAssetController extends Controller
     {
         // Validasi input
         $request->validate([
-            'kode_kategori_asset' => 'required|string|max:25',
-            'kategori_asset' => 'required|string|max:25',
+            'kode_kategori_asset' => 'required|string|max:255|unique:tbl_kategori_asset,kode_kategori_asset',
+            'kategori_asset' => 'required|string|max:255',
         ]);
 
-        // Simpan data ke database
-        KategoriAsset::create($request->all());
+        // Cek apakah kode kategori sudah ada di database
+        if (KategoriAsset::where('kode_kategori_asset', $request->kode_kategori_asset)->exists()) {
+            return redirect()->back()->with('error', 'Kode Kategori Asset sudah ada!');
+        }
 
-        // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('admin.kategori_asset.index')->with('success', 'Kategori asset berhasil ditambahkan.');
+        // Simpan data ke database
+        KategoriAsset::create([
+            'kode_kategori_asset' => $request->kode_kategori_asset,
+            'kategori_asset' => $request->kategori_asset,
+        ]);
+
+        return redirect()->route('admin.kategori_asset.index')->with('success', 'Kategori Asset berhasil ditambahkan!');
     }
 
     /**

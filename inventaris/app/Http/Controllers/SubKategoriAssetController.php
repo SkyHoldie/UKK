@@ -19,11 +19,8 @@ class SubKategoriAssetController extends Controller
     
     public function create()
     {
-        // Ambil semua kategori asset dari database
-        $kategori_assets = KategoriAsset::all();
-        
-        // Kirim data kategori_assets ke view
-        return view('sub_kategori_asset.create', compact('kategori_assets'));
+        $kategoriAssets = KategoriAsset::all(); // Mengambil semua kategori
+        return view('admin.sub_kategori_asset.create', compact('kategoriAssets')); // Mengirimkan data kategori ke view
     }
 
     public function store(Request $request)

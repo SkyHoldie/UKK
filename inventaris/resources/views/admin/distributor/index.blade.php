@@ -27,8 +27,8 @@
                         <td>{{ $distributor->nama_distributor }}</td>
                         <td>{{ $distributor->alamat }}</td>
                         <td>
-                            <a href="{{ route('admin.distributor.edit', $distributor->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.distributor.destroy', $distributor->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus distributor ini?')">
+                            <a href="{{ route('admin.distributor.edit', $distributor->id_distributor) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('admin.distributor.destroy', $distributor->id_distributor) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus distributor ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

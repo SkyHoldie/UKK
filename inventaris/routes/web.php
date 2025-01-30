@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriAssetController;
-use App\Http\Controllers\SubKategoriAssetController;
+use App\Http\Controllers\Admin\SubKategoriAssetController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\MerkController;
 use App\Http\Controllers\SatuanController;
@@ -21,8 +21,11 @@ use App\Http\Controllers\AssetController;
 
 Route::get('master-barang', [MasterBarangController::class, 'index'])->name('user.master_barang.index');
 
-Route::get('/sub-kategori-asset/create', [SubKategoriAssetController::class, 'create'])->name('sub_kategori_asset.create');
-Route::post('/sub-kategori-asset', [SubKategoriAssetController::class, 'store'])->name('sub_kategori_asset.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sub-kategori-asset', [SubKategoriAssetController::class, 'index'])->name('sub_kategori_asset.index');
+    Route::get('/sub-kategori-asset/{id}/edit', [SubKategoriAssetController::class, 'edit'])->name('sub_kategori_asset.edit');
+    Route::put('/sub-kategori-asset/{id}', [SubKategoriAssetController::class, 'update'])->name('sub_kategori_asset.update');
+});
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('hitung_depresiasi', HitungDepresiasiController::class);
@@ -36,7 +39,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('depresiasi', DepresiasiController::class);
     Route::resource('master_barang', MasterBarangController::class);
     Route::resource('sub_kategori_asset', SubKategoriAssetController::class);
-    Route::resource('kategori_asset', KategoriAssetController::class);
 });
 
 // Grup dengan middleware 'admin' hanya untuk rute yang memerlukan akses admin

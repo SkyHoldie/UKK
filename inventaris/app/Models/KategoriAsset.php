@@ -17,4 +17,9 @@ class KategoriAsset extends Model
         'kode_kategori_asset',
         'kategori_asset',
     ];
+
+    public function subKategoriAssets()
+    {
+        return $this->hasMany(SubKategoriAsset::class, 'kategori_id', 'id_kategori_asset');
+    }
 }

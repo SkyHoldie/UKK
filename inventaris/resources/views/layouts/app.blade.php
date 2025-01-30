@@ -277,7 +277,7 @@
                     <h1 class="c-header-title">Dashboard</h1>
                     <div class="user-info d-flex align-items-center">
                         <span class="bi bi-person-circle me-2"></span>
-                        <span>Hi, Admin</span> <!-- Sapaan "Hi, Admin" -->
+                        <span>Hi, {{auth()->user()->name}}</span> <!-- Sapaan "Hi, Admin" -->
                     </div>
                 </div>
             </div>

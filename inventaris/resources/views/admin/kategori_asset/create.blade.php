@@ -3,7 +3,15 @@
 @section('content')
 <div class="container mt-5">
     <h1 class="mb-4 text-center text-primary">Tambah Kategori Asset</h1>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('admin.kategori_asset.store') }}" method="POST" class="bg-white p-4 rounded shadow-sm">
         @csrf
         <div class="mb-4">
